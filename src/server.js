@@ -14,13 +14,19 @@ const PORT = Number(getEnvVar('PORT', '4000'));
 export const startServer = () => {
   const app = express();
 
+  app.use(
+    express.json({
+      type: ['application/json', 'application/vnd.api+json'],
+    }),
+  );
+
   app.use(cors());
 
   app.use(pino({ transport: { target: 'pino-pretty' } }));
 
-  app.get('/', (req, res) => {
-    res.json({ message: 'Hello, World!' });
-  });
+  // app.get('/', (req, res) => {
+  //   res.json({ message: 'Hello, World!' });
+  // });
 
   app.use(notesRouter);
 
