@@ -16,7 +16,11 @@ export const createNote = async (payload) => {
 };
 
 export const updateNote = async (noteId, payload) => {
-  const note = await NotesCollection.findOneAndUpdate({ _id: noteId }, payload);
+  const note = await NotesCollection.findOneAndUpdate(
+    { _id: noteId },
+    payload,
+    { new: true },
+  );
   return note;
 };
 
